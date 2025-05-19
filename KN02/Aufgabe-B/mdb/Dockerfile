@@ -1,0 +1,3 @@
+FROM mariadb:latest
+ENV MYSQL_ROOT_PASSWORD=geheim
+ENV MYSQL_DATABASE=schule
