@@ -1,0 +1,29 @@
+version: '3.8'
+volumes:
+  my-named-volume:
+
+services:
+  container-one:
+    image: nginx:latest
+    container_name: my-app-container-one
+    ports:
+      - "8080:80" 
+    volumes:
+      - type: volume
+        source: my-named-volume
+        target: /app/named-data
+      - type: bind
+        source: ./host_bind_data
+        target: /app/bind-data
+      - type: tmpfs
+        target: /app/tmp-data
+        tmpfs:
+          size: 10m 
+
+  container-two:
+    image: nginx:latest
+    container_name: my-app-container-two
+    ports:
+      - "8081:80" 
+    volumes:
+      - my-named-volume:/app/named-data 
